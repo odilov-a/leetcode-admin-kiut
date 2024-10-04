@@ -91,7 +91,7 @@ const Student = () => {
                     title={t("Create student")}
                     icon={<CreateDoc />}
                     size="large"
-                    className="bg-[#549E35]"
+                    className="bg-[#002855]"
                     onClick={() => showCreateModal({ open: true, data: {} })}
                   />
                   {meta && meta.perPage && (

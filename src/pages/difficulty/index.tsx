@@ -14,17 +14,15 @@ const Difficulty = () => {
   const [moreModal, showMoreModal] = useState({ open: false, data: {} });
   const [page, setPage] = useState(1);
   const { mutate } = usePost();
-
   const onDeleteHandler = (id: string) => {
     Modal.confirm({
-      title: t("Вы действительно хотите удалить ?"),
+      title: t("Вы уверены что хотите удалить?"),
       okText: t("да"),
       okType: "danger",
       cancelText: t("нет"),
       onOk: () => deleteAction(id),
     });
   };
-
   const deleteAction = (id: string) => {
     if (id) {
       mutate(
@@ -47,7 +45,6 @@ const Difficulty = () => {
       );
     }
   };
-
   return (
     <div className="flex">
       <Modal
@@ -56,7 +53,9 @@ const Difficulty = () => {
         footer={null}
         centered
         title={
-          get(createModal, "data._id") ? t("Update difficulty") : t("Create difficulty")
+          get(createModal, "data._id")
+            ? t("Update difficulty")
+            : t("Create difficulty")
         }
         width={500}
         destroyOnClose
@@ -91,22 +90,22 @@ const Difficulty = () => {
                   onClick={() => showCreateModal({ open: true, data: {} })}
                 />
                 {meta && meta.perPage && (
-                <div className="mt-[20px] flex justify-center">
-                  <Pagination
-                    current={meta.currentPage}
-                    pageSize={meta.perPage}
-                    total={meta.totalCount}
-                    onChange={(page) => {
-                      setPage(page);
-                      window.scrollTo({
-                        behavior: "smooth",
-                        top: 0,
-                        left: 0,
-                      });
-                    }}
-                  />
-                </div>
-              )}
+                  <div className="mt-[20px] flex justify-center">
+                    <Pagination
+                      current={meta.currentPage}
+                      pageSize={meta.perPage}
+                      total={meta.totalCount}
+                      onChange={(page) => {
+                        setPage(page);
+                        window.scrollTo({
+                          behavior: "smooth",
+                          top: 0,
+                          left: 0,
+                        });
+                      }}
+                    />
+                  </div>
+                )}
               </div>
               <Row className="h-[120px] mt-[15px]">
                 {items.map((card) => (

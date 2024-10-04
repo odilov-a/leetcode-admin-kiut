@@ -80,8 +80,8 @@ const App = (props: Props) => {
 
   const uploadButton = (
     <button style={{ border: 0, background: "none" }} type="button">
-      <PlusOutlined style={isDark ? { color: "#549E35" } : { color: "#549E35" }} />
-      <div className="mt-[8px] dark:text-[#549E35]">{t("Upload")}</div>
+      <PlusOutlined style={isDark ? { color: "#002855" } : { color: "#002855" }} />
+      <div className="mt-[8px] dark:text-[#002855]">{t("Upload")}</div>
     </button>
   );
 

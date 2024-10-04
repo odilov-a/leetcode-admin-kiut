@@ -4,8 +4,9 @@ const More = ({ showMoreModal, moreModal }: any) => {
   const data = moreModal?.data;
   const { t, get } = useHooks();
   return (
-    <div className="">
-      <b>{t("Difficulty: ")}</b> {get(data, "title")}
+    <div className="flex">
+      <p className="mr-[10px]">{t("Difficulty: ")}</p>
+      <b>{get(data, "title")}</b>
     </div>
   );
 };

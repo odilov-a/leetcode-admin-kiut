@@ -39,10 +39,10 @@ const Navigation: React.FC = () => {
       mode="inline"
       openKeys={openKeys}
       onOpenChange={onOpenChange}
-      className="h-full w-[280px] dark:bg-[#549E35]"
+      className="h-full w-[280px] dark:bg-[#002855]"
       style={{ transition: "none" }}
     >
-      <div className="flex items-center justify-center text-center text-[20px] font-[500] mt-[30px] mb-[25px] cursor-pointer dark:text-[#549E35]">
+      <div className="flex items-center justify-center text-center text-[20px] font-[500] mt-[30px] mb-[25px] cursor-pointer dark:text-[#002855]">
         <img
           src={logo}
           alt="Logo"
@@ -63,7 +63,7 @@ const Navigation: React.FC = () => {
               {menuItem.children.map((childItem) => (
                 <Menu.Item
                   key={childItem.key}
-                  className="left-sidebar text-[#549E35] text-[17px]"
+                  className="left-sidebar text-[#002855] text-[17px]"
                 >
                   {childItem.route ? (
                     // @ts-ignore

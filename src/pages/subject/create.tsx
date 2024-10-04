@@ -34,17 +34,15 @@ const Subject = ({ showCreateModal, createModal }: any): JSX.Element => {
           },
         ]}
         onSuccess={(data, resetForm, query) => {
-          query.invalidateQueries({ queryKey: ["subject"] });
+          query.invalidateQueries({ queryKey: ["subjects"] });
           resetForm();
           showCreateModal(false);
         }}
         onError={(error) => {
-          console.error("Error updating subject", error);
+          console.error("Error updating subjects", error);
         }}
       >
-        {({ isLoading, errors, values }) => {
-          console.log(values);
-          console.log(errors);
+        {({ isLoading }) => {
           return (
             <Spin spinning={isLoading} tip={t("Verifying")}>
               <div className="mt-5">
@@ -53,24 +51,24 @@ const Subject = ({ showCreateModal, createModal }: any): JSX.Element => {
                   name="titleUz"
                   component={Fields.Input}
                   rootClassName="mb-[10px]"
-                  label={t("category uzbek")}
-                  placeholder={t("category uzbek")}
+                  label={t("subject uzbek")}
+                  placeholder={t("subject uzbek")}
                 />
                 <Field
                   required
                   name="titleRu"
                   component={Fields.Input}
                   rootClassName="mb-[10px]"
-                  label={t("category ruscha")}
-                  placeholder={t("category ruscha")}
+                  label={t("subject russian")}
+                  placeholder={t("subject russian")}
                 />
                 <Field
                   required
                   name="titleEn"
                   component={Fields.Input}
                   rootClassName="mb-[10px]"
-                  label={t("category qoraqalpoq")}
-                  placeholder={t("category kiril")}
+                  label={t("subject english")}
+                  placeholder={t("subject english")}
                 />
                 <Button
                   size="large"

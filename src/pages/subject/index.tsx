@@ -14,17 +14,15 @@ const Subject = () => {
   const [moreModal, showMoreModal] = useState({ open: false, data: {} });
   const [page, setPage] = useState(1);
   const { mutate } = usePost();
-
   const onDeleteHandler = (id: string) => {
     Modal.confirm({
-      title: t("Вы действительно хотите удалить ?"),
+      title: t("Вы уверены что хотите удалить?"),
       okText: t("да"),
       okType: "danger",
       cancelText: t("нет"),
       onOk: () => deleteAction(id),
     });
   };
-
   const deleteAction = (id: string) => {
     if (id) {
       mutate(
@@ -47,7 +45,6 @@ const Subject = () => {
       );
     }
   };
-
   return (
     <div className="flex">
       <Modal
