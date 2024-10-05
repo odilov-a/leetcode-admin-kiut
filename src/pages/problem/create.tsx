@@ -1,5 +1,6 @@
 import { Spin } from "antd";
 import { Field } from "formik";
+import { useState } from "react";
 import { useHooks } from "hooks";
 import { Container } from "modules";
 import { Fields, Button } from "components";
@@ -7,6 +8,16 @@ import { Fields, Button } from "components";
 const Problem = ({ showCreateModal, createModal }: any): JSX.Element => {
   const { t, get } = useHooks();
   let data = createModal.data && createModal?.data;
+  const [testCases, setTestCases] = useState(get(data, "testCases", [""]));
+  const [tutorials, setTutorials] = useState(get(data, "tutorials", [""]));
+
+  const addTutorial = () => {
+    setTutorials([...tutorials, ""]);
+  };
+
+  const addTestCase = () => {
+    setTestCases([...testCases, { input: "", expectedOutput: "" }]);
+  };
   return (
     <div>
       <Container.Form
@@ -168,32 +179,6 @@ const Problem = ({ showCreateModal, createModal }: any): JSX.Element => {
                 <div className="flex">
                   <Field
                     required
-                    name="point"
-                    label={t("point")}
-                    component={Fields.Input}
-                    placeholder={t("point")}
-                    rootClassName="mb-[10px] mr-[10px] w-full"
-                  />
-                  <Field
-                    required
-                    name="timeLimit"
-                    label={t("timeLimit")}
-                    component={Fields.Input}
-                    placeholder={t("timeLimit")}
-                    rootClassName="mb-[10px] mr-[10px] w-full"
-                  />
-                  <Field
-                    required
-                    name="memoryLimit"
-                    label={t("memoryLimit")}
-                    component={Fields.Input}
-                    placeholder={t("memoryLimit")}
-                    rootClassName="mb-[10px] w-full"
-                  />
-                </div>
-                <div className="flex">
-                  <Field
-                    required
                     name="difficulty"
                     url="/difficulties"
                     optionValue="_id"
@@ -220,33 +205,88 @@ const Problem = ({ showCreateModal, createModal }: any): JSX.Element => {
                     }}
                   />
                 </div>
-                <div>
-                  <Field
-                    required
-                    name="tutorials"
-                    label={t("tutorials")}
-                    component={Fields.Input}
-                    placeholder={t("tutorials")}
-                    rootClassName="mb-[10px] mr-[10px] w-[25%]"
-                  />
-                </div>
                 <div className="flex">
-                  <Field
-                    required
-                    name="testCases.input"
-                    component={Fields.Input}
-                    label={t("testCases.input")}
-                    placeholder={t("testCases.input")}
-                    rootClassName="mb-[10px] mr-[10px] w-full"
-                  />
-                  <Field
-                    required
-                    component={Fields.Input}
-                    name="testCases.expectedOutput"
-                    rootClassName="mb-[10px] w-full"
-                    label={t("testCases.expectedOutput")}
-                    placeholder={t("testCases.expectedOutput")}
-                  />
+                  <div>
+                    <div className="flex">
+                      <p className="text-[#9EA3B5] px-[12px] py-[6px] bg-[#E6ECFE] dark:bg-[#454d70] rounded-[6px] inline-block mb-[12px] mr-[10px]">
+                        {t("tutorial")}
+                      </p>
+                      <Button
+                        size="large"
+                        onClick={addTutorial}
+                        title={t("Add Tutorial")}
+                        className="mb-[10px]"
+                      />
+                    </div>
+                    {tutorials.map((tutorial: any, index: any) => (
+                      <div key={index} className="flex mb-[10px]">
+                        <Field
+                          value={tutorial}
+                          name={`tutorials.${index}`}
+                          component={Fields.Input}
+                          placeholder={t("tutorial")}
+                          rootClassName="mr-[25px]"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                  <div>
+                    <div className="flex">
+                      <p className="text-[#9EA3B5] px-[12px] py-[6px] bg-[#E6ECFE] dark:bg-[#454d70] rounded-[6px] inline-block mb-[12px] mr-[40%]">
+                        {t("testCases")}
+                      </p>
+                      <Button
+                        size="large"
+                        onClick={addTestCase}
+                        title={t("Add Test Case")}
+                        className="mb-[10px]"
+                      />
+                    </div>
+                    {testCases.map((testCase: any, index: any) => (
+                      <div key={index} className="flex mb-[10px]">
+                        <Field
+                          name={`testCases${index}.input`}
+                          component={Fields.Input}
+                          placeholder={t("testCases.input")}
+                          value={testCase.input}
+                          rootClassName="w-[45%] mr-[10px]"
+                        />
+                        <Field
+                          name={`testCases${index}.expectedOutput`}
+                          component={Fields.Input}
+                          placeholder={t("testCases.expectedOutput")}
+                          value={testCase.expectedOutput}
+                          rootClassName="w-[45%]"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                  <div>
+                    <Field
+                      required
+                      name="point"
+                      label={t("point")}
+                      component={Fields.Input}
+                      placeholder={t("point")}
+                      rootClassName="mb-[10px] w-full"
+                    />
+                    <Field
+                      required
+                      name="timeLimit"
+                      label={t("timeLimit")}
+                      component={Fields.Input}
+                      placeholder={t("timeLimit")}
+                      rootClassName="mb-[10px] w-full"
+                    />
+                    <Field
+                      required
+                      name="memoryLimit"
+                      label={t("memoryLimit")}
+                      component={Fields.Input}
+                      placeholder={t("memoryLimit")}
+                      rootClassName="mb-[10px] w-full"
+                    />
+                  </div>
                 </div>
                 <Button
                   size="large"
