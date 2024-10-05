@@ -2,7 +2,6 @@ import { Spin } from "antd";
 import { Field } from "formik";
 import { useHooks } from "hooks";
 import { Container } from "modules";
-import { utils } from "services";
 import { Fields, Button } from "components";
 
 const Student = ({ showCreateModal, createModal }: any): JSX.Element => {

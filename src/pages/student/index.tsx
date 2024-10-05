@@ -94,7 +94,7 @@ const Student = () => {
                     className="bg-[#002855]"
                     onClick={() => showCreateModal({ open: true, data: {} })}
                   />
-                  {meta && meta.perPage && (
+                  {/* {meta && meta.perPage && (
                     <div className="mt-[20px] flex justify-center">
                       <Pagination
                         current={meta.currentPage}
@@ -110,7 +110,7 @@ const Student = () => {
                         }}
                       />
                     </div>
-                  )}
+                  )} */}
                 </div>
                 <Row className="h-[120px] mt-[15px]">
                   {items.map((card) => {

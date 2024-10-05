@@ -2,30 +2,77 @@ import { Spin } from "antd";
 import { Field } from "formik";
 import { useHooks } from "hooks";
 import { Container } from "modules";
-import { utils } from "services";
 import { Fields, Button } from "components";
 
-const Teacher = ({ showCreateModal, createModal }: any): JSX.Element => {
+const Problem = ({ showCreateModal, createModal }: any): JSX.Element => {
   const { t, get } = useHooks();
   let data = createModal.data && createModal?.data;
   return (
     <div>
       <Container.Form
-        url={data._id ? `/teachers/${get(data, "_id")}` : "/teachers/register"}
+        url={data._id ? `/problems/${get(data, "_id")}` : "/problems"}
         method={data._id ? "put" : "post"}
-        name="teachers"
+        name="problems"
         fields={[
           {
             type: "string",
             required: true,
-            name: "firstName",
-            value: get(data, "firstName"),
+            name: "titleUz",
+            value: get(data, "titleUz"),
           },
           {
             type: "string",
             required: true,
-            name: "lastName",
-            value: get(data, "lastName"),
+            name: "descriptionUz",
+            value: get(data, "descriptionUz"),
+          },
+          {
+            type: "any",
+            required: true,
+            name: "titleRu",
+            value: get(data, "titleRu"),
+          },
+          {
+            type: "string",
+            required: true,
+            name: "descriptionRu",
+            value: get(data, "descriptionRu"),
+          },
+          {
+            type: "string",
+            required: true,
+            name: "titleEn",
+            value: get(data, "titleEn"),
+          },
+          {
+            type: "string",
+            required: true,
+            name: "descriptionEn",
+            value: get(data, "descriptionEn"),
+          },
+          {
+            name: "point",
+            required: true,
+            type: "number",
+            value: get(data, "point"),
+          },
+          {
+            type: "array",
+            required: true,
+            name: "tutorials",
+            value: get(data, "tutorials"),
+          },
+          {
+            type: "number",
+            required: true,
+            name: "timeLimit",
+            value: get(data, "timeLimit"),
+          },
+          {
+            type: "number",
+            required: true,
+            name: "memoryLimit",
+            value: get(data, "memoryLimit"),
           },
           {
             type: "any",
@@ -34,33 +81,27 @@ const Teacher = ({ showCreateModal, createModal }: any): JSX.Element => {
             value: get(data, "subject"),
           },
           {
-            type: "string",
-            name: "password",
-          },
-          {
-            type: "string",
-            required: true,
-            name: "username",
-            value: get(data, "username"),
-          },
-          {
-            required: true,
-            name: "phoneNumber",
-            value: get(data, "phoneNumber"),
-          },
-          {
             type: "any",
-            name: "photoUrl",
-            value: get(data, "photoUrl"),
+            required: true,
+            name: "difficulty",
+            value: get(data, "difficulty"),
+          },
+          {
+            type: "array",
+            name: "testCases",
+            value: {
+              input: get(data, "testCases.input"),
+              expectedOutput: get(data, "testCases.expectedOutput"),
+            },
           },
         ]}
         onSuccess={(data, resetForm, query) => {
-          query.invalidateQueries({ queryKey: ["teachers"] });
+          query.invalidateQueries({ queryKey: ["problems"] });
           resetForm();
           showCreateModal(false);
         }}
         onError={(error) => {
-          console.error("Error updating teacher", error);
+          console.error("Error updating problems", error);
         }}
       >
         {({ isLoading, setFieldValue }) => {
@@ -70,50 +111,103 @@ const Teacher = ({ showCreateModal, createModal }: any): JSX.Element => {
                 <div className="flex">
                   <Field
                     required
-                    name="firstName"
-                    label={t("First name")}
+                    name="titleUz"
+                    label={t("titleUz")}
                     component={Fields.Input}
-                    placeholder={t("First name")}
+                    placeholder={t("titleUz")}
                     rootClassName="mb-[10px] mr-[10px] w-full"
                   />
                   <Field
                     required
-                    name="lastName"
-                    label={t("Last name")}
-                    component={Fields.Input}
-                    placeholder={t("Last name")}
+                    rows={4}
+                    name="descriptionUz"
+                    label={t("descriptionUz")}
+                    component={Fields.Textarea}
+                    placeholder={t("descriptionUz")}
                     rootClassName="mb-[10px] w-full"
                   />
                 </div>
                 <div className="flex">
                   <Field
                     required
-                    name="username"
-                    label={t("Username")}
+                    name="titleRu"
+                    label={t("titleRu")}
                     component={Fields.Input}
-                    placeholder={t("Username")}
+                    placeholder={t("titleRu")}
                     rootClassName="mb-[10px] mr-[10px] w-full"
                   />
                   <Field
-                    name="password"
-                    label={t("Password")}
-                    component={Fields.Input}
-                    placeholder={t("Password")}
-                    rootClassName="mb-[10px] mr-[10px] w-full"
+                    required
+                    rows={4}
+                    name="descriptionRu"
+                    label={t("descriptionRu")}
+                    component={Fields.Textarea}
+                    placeholder={t("descriptionRu")}
+                    rootClassName="mb-[10px] w-full"
                   />
                 </div>
                 <div className="flex">
                   <Field
                     required
-                    name="phoneNumber"
+                    name="titleEn"
+                    label={t("titleEn")}
                     component={Fields.Input}
-                    label={t("Phone number")}
-                    placeholder={t("Phone number")}
+                    placeholder={t("titleEn")}
                     rootClassName="mb-[10px] mr-[10px] w-full"
                   />
                   <Field
+                    required
+                    rows={4}
+                    name="descriptionEn"
+                    label={t("descriptionEn")}
+                    component={Fields.Textarea}
+                    placeholder={t("descriptionEn")}
+                    rootClassName="mb-[10px] w-full"
+                  />
+                </div>
+                <div className="flex">
+                  <Field
+                    required
+                    name="point"
+                    label={t("point")}
+                    component={Fields.Input}
+                    placeholder={t("point")}
+                    rootClassName="mb-[10px] mr-[10px] w-full"
+                  />
+                  <Field
+                    required
+                    name="timeLimit"
+                    label={t("timeLimit")}
+                    component={Fields.Input}
+                    placeholder={t("timeLimit")}
+                    rootClassName="mb-[10px] mr-[10px] w-full"
+                  />
+                  <Field
+                    required
+                    name="memoryLimit"
+                    label={t("memoryLimit")}
+                    component={Fields.Input}
+                    placeholder={t("memoryLimit")}
+                    rootClassName="mb-[10px] w-full"
+                  />
+                </div>
+                <div className="flex">
+                  <Field
+                    required
+                    name="difficulty"
+                    url="/difficulties"
+                    optionValue="_id"
+                    optionLabel="title"
+                    label={t("difficulty")}
+                    placeholder={t("difficulty")}
+                    component={Fields.AsyncSelect}
+                    rootClassName="mb-[10px] mr-[10px] w-full"
+                    onChange={(value: any) => {
+                      setFieldValue("difficulty", value);
+                    }}
+                  />
+                  <Field
                     name="subject"
-                    isMulti={true}
                     url="/subjects"
                     optionValue="_id"
                     optionLabel="title"
@@ -127,15 +221,31 @@ const Teacher = ({ showCreateModal, createModal }: any): JSX.Element => {
                   />
                 </div>
                 <div>
-                  <p className="text-[#9EA3B5] px-[12px] py-[6px] bg-[#E6ECFE] dark:bg-[#454d70] rounded-[6px] inline-block mb-[12px] mr-[10px]">
-                    {t("photo")}
-                  </p>
                   <Field
-                    name="photoUrl"
-                    label={t("Photo")}
-                    placeholder={t("Photo")}
-                    rootClassName="mb-[10px]"
-                    component={Fields.FileUpload3}
+                    required
+                    name="tutorials"
+                    label={t("tutorials")}
+                    component={Fields.Input}
+                    placeholder={t("tutorials")}
+                    rootClassName="mb-[10px] mr-[10px] w-[25%]"
+                  />
+                </div>
+                <div className="flex">
+                  <Field
+                    required
+                    name="testCases.input"
+                    label={t("testCases.input")}
+                    component={Fields.Input}
+                    placeholder={t("testCases.input")}
+                    rootClassName="mb-[10px] mr-[10px] w-full"
+                  />
+                  <Field
+                    required
+                    name="testCases.expectedOutput"
+                    label={t("testCases.expectedOutput")}
+                    component={Fields.Input}
+                    placeholder={t("testCases.expectedOutput")}
+                    rootClassName="mb-[10px] w-full"
                   />
                 </div>
                 <Button
@@ -153,4 +263,4 @@ const Teacher = ({ showCreateModal, createModal }: any): JSX.Element => {
   );
 };
 
-export default Teacher;
+export default Problem;
