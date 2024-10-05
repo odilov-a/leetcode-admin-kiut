@@ -1,54 +1,68 @@
 import { useState } from "react";
-import { Card, Modal } from "antd";
-import { useHooks, useGet } from "hooks";
+import { Modal, Card, Row, Col } from "antd";
 import { Edit } from "assets/images/icons";
-import Update from "./update";
+import { useHooks } from "hooks";
+import { Container } from "modules";
+import Create from "./update";
 
 const User = () => {
-  const { get, t } = useHooks();
   const { Meta } = Card;
-  const [editModal, showEditModal] = useState(false);
-  const [selectedCard, setSelectedCard] = useState({});
-  const onEdit = (item: object) => {
-    showEditModal(true);
-    setSelectedCard(item);
-  };
-  const { data } = useGet({ name: "me", url: "admins/me" });
-  const info = get(data, "data", {});
+  const { get, t } = useHooks();
+  const [createModal, showCreateModal] = useState({ open: false, data: {} });
   return (
     <div className="flex">
       <Modal
-        open={editModal}
-        onOk={() => showEditModal(true)}
-        onCancel={() => showEditModal(false)}
+        open={createModal.open}
+        onCancel={() => showCreateModal({ open: false, data: {} })}
         footer={null}
         centered
-        title={t("Edit user")}
+        title={
+          get(createModal, "data._id")
+            ? t("Update difficulty")
+            : t("Create difficulty")
+        }
         width={500}
         destroyOnClose
       >
-        <Update {...{ showEditModal, selectedCard }} />
+        <Create {...{ showCreateModal, createModal }} />
       </Modal>
       <div>
-        <div>
-          <Card hoverable style={{ width: 450, marginRight: 15 }}>
-            <Meta
-              className="pb-[60px]"
-              title={
-                <div className="">
-                  <p>
-                    {t("Username")} - {get(info, "username", "")}
-                  </p>
-                </div>
-              }
-            />
-            <div className="btnPanel">
-              <div className="editBtn" onClick={() => onEdit(info)}>
-                <Edit />
-              </div>
+        <Container.All name="admins" url="/admins">
+          {({ items }) => (
+            <div>
+              <div className="flex justify-between"></div>
+              <Row className="h-[120px] mt-[15px]">
+                {items.map((card) => (
+                  <Col className="cursor-pointer">
+                    <div className="mr-8 mb-4 w-[250px] h-[150px]">
+                      <Meta
+                        className="pb-[40px] p-0"
+                        title={
+                          <div className="mb-1">
+                            <p className="dark:text-[#e5e7eb] block truncate">
+                              <strong>{get(card, "username", "")}</strong>
+                            </p>
+                          </div>
+                        }
+                      />
+                      <div className="btnPanel2">
+                        <div
+                          className="editBtn"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            showCreateModal({ open: true, data: card });
+                          }}
+                        >
+                          <Edit />
+                        </div>
+                      </div>
+                    </div>
+                  </Col>
+                ))}
+              </Row>
             </div>
-          </Card>
-        </div>
+          )}
+        </Container.All>
       </div>
     </div>
   );

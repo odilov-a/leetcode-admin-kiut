@@ -4,59 +4,62 @@ import { useHooks } from "hooks";
 import { Container } from "modules";
 import { Fields, Button } from "components";
 
-const User = ({ showEditModal, selectedCard }: any): JSX.Element => {
-  const { get, t } = useHooks();
+const User = ({ showCreateModal, createModal }: any): JSX.Element => {
+  const { t, get } = useHooks();
+  let data = createModal.data && createModal?.data;
   return (
     <div>
       <Container.Form
-        url="users/update-user"
-        method="put"
-        name="user"
+        url={data._id ? `/admins/${get(data, "_id")}` : "admins/register"}
+        method={data._id ? "put" : "post"}
+        name="admins"
         fields={[
           {
             type: "string",
             required: true,
             name: "username",
-            value: get(selectedCard, "username"),
+            value: get(data, "username"),
           },
           {
             type: "string",
             required: true,
             name: "password",
-            value: get(selectedCard, "password"),
           },
         ]}
         onSuccess={(data, resetForm, query) => {
-          query.invalidateQueries({ queryKey: ["users"] });
+          query.invalidateQueries({ queryKey: ["admins"] });
           resetForm();
-          showEditModal(false);
+          showCreateModal(false);
         }}
         onError={(error) => {
-          console.log("Error", error);
+          console.error("Error updating admins", error);
         }}
       >
-        {({ isSubmitting }) => {
+        {({ isLoading }) => {
           return (
-            <Spin spinning={isSubmitting} tip={t("Verifying")}>
-              <div>
+            <Spin spinning={isLoading} tip={t("Verifying")}>
+              <div className="mt-5">
                 <Field
-                  type="text"
+                  required
                   name="username"
-                  label={t("Username")}
                   component={Fields.Input}
-                  placeholder={t("Username")}
+                  rootClassName="mb-[10px]"
+                  label={t("username")}
+                  placeholder={t("username")}
                 />
                 <Field
-                  type="password"
+                  required
                   name="password"
-                  label={t("Password")}
+                  type="password"
+                  label={t("password")}
                   component={Fields.Input}
-                  placeholder={t("Password")}
+                  rootClassName="mb-[10px]"
+                  placeholder={t("password")}
                 />
                 <Button
                   size="large"
+                  title={t("Save")}
                   htmlType="submit"
-                  title={t("Saqlash")}
                   className="w-full mt-[10px]"
                 />
               </div>
