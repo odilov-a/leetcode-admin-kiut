@@ -10,19 +10,19 @@ const More = ({ showMoreModal, moreModal }: any) => {
         <div className="mr-[30px]">
           <div className="flex items-center mb-[10px]">
             <p className="mr-[20px]">
-              <b>{t("firstName")}:</b>
+              <p>{t("firstName")}:</p>
             </p>
-            <p>{data.firstName}</p>
+            <b>{data.firstName}</b>
           </div>
           <div className="flex items-center mb-[10px]">
             <p className="mr-[20px]">
-              <b>{t("lastName")}:</b>
+              <p>{t("lastName")}:</p>
             </p>
-            <p>{data.lastName}</p>
+            <b>{data.lastName}</b>
           </div>
           <div className="flex items-center mb-[10px]">
             <p className="mr-[20px]">
-              <b>{t("Telefon raqam")}:</b>
+              <p>{t("Telefon raqam")}:</p>
             </p>
             <p>
               <a
@@ -34,19 +34,18 @@ const More = ({ showMoreModal, moreModal }: any) => {
             </p>
           </div>
         </div>
-
         <div className="mr-[20px]">
           <div className="flex items-center mb-[10px]">
             <p className="mr-[20px]">
-              <b>{t("username")}:</b>
+              <p>{t("username")}:</p>
             </p>
-            <p>{data.username}</p>
+            <b>{data.username}</b>
           </div>
           <div className="flex items-center mb-[10px]">
             <p className="mr-[20px]">
-              <b>{t("balance")}:</b>
+              <p>{t("balance")}:</p>
             </p>
-            <p>{data.balance}</p>
+            <b>{data.balance} {t("ball")}</b>
           </div>
         </div>
       </div>

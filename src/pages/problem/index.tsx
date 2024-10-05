@@ -57,7 +57,7 @@ const Subject = () => {
             ? t("Update problem")
             : t("Create problem")
         }
-        width={1000}
+        width={900}
         destroyOnClose
       >
         <Create {...{ showCreateModal, createModal }} />
@@ -68,7 +68,7 @@ const Subject = () => {
         footer={null}
         centered
         title={t("More information")}
-        width={950}
+        width={700}
         destroyOnClose
       >
         <More {...{ showMoreModal, moreModal }} />
@@ -121,6 +121,11 @@ const Subject = () => {
                             <p className="dark:text-[#e5e7eb] block truncate">
                               <strong>{get(card, "title", "")}</strong>
                             </p>
+                          </div>
+                        }
+                        description={
+                          <div className="dark:text-[#e5e7eb] block truncate">
+                            <p>{get(card, "description", "")}</p>
                           </div>
                         }
                       />

@@ -10,29 +10,29 @@ const More = ({ showMoreModal, moreModal }: any) => {
         <div className="mr-[30px]">
           <div className="flex items-center mb-[10px]">
             <p className="mr-[20px]">
-              <b>{t("firstName")}:</b>
+              <p>{t("firstName")}:</p>
             </p>
-            <p>{data.firstName}</p>
+            <b>{data.firstName}</b>
           </div>
           <div className="flex items-center mb-[10px]">
             <p className="mr-[20px]">
-              <b>{t("lastName")}:</b>
+              <p>{t("lastName")}:</p>
             </p>
-            <p>{data.lastName}</p>
+            <b>{data.lastName}</b>
           </div>
           <div className="flex items-center mb-[10px]">
             <p className="mr-[20px]">
-              <b>{t("subjects")}:</b>
+              <p>{t("subjects")}:</p>
             </p>
             <div>
               {data.subject && data.subject.length > 0 ? (
                 <ul>
                   {data.subject.map((sub: any) => (
-                    <li key={sub._id}>{sub.title}</li>
+                    <b><li key={sub._id}>{sub.title}</li></b>
                   ))}
                 </ul>
               ) : (
-                <p>{t("No subjects available")}</p>
+                <b>{t("No subjects available")}</b>
               )}
             </div>
           </div>
@@ -40,13 +40,13 @@ const More = ({ showMoreModal, moreModal }: any) => {
         <div className="mr-[20px]">
           <div className="flex items-center mb-[10px]">
             <p className="mr-[20px]">
-              <b>{t("username")}:</b>
+              <p>{t("username")}:</p>
             </p>
-            <p>{data.username}</p>
+            <b>{data.username}</b>
           </div>
           <div className="flex items-center mb-[10px]">
             <p className="mr-[20px]">
-              <b>{t("Telefon raqam")}:</b>
+              <p>{t("Telefon raqam")}:</p>
             </p>
             <p>
               <a
