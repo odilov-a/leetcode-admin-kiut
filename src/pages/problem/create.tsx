@@ -57,7 +57,7 @@ const Problem = ({ showCreateModal, createModal }: any): JSX.Element => {
             value: get(data, "point"),
           },
           {
-            type: "array",
+            type: "any",
             required: true,
             name: "tutorials",
             value: get(data, "tutorials"),
@@ -87,7 +87,7 @@ const Problem = ({ showCreateModal, createModal }: any): JSX.Element => {
             value: get(data, "difficulty"),
           },
           {
-            type: "array",
+            type: "object",
             name: "testCases",
             value: {
               input: get(data, "testCases.input"),
@@ -234,18 +234,18 @@ const Problem = ({ showCreateModal, createModal }: any): JSX.Element => {
                   <Field
                     required
                     name="testCases.input"
-                    label={t("testCases.input")}
                     component={Fields.Input}
+                    label={t("testCases.input")}
                     placeholder={t("testCases.input")}
                     rootClassName="mb-[10px] mr-[10px] w-full"
                   />
                   <Field
                     required
-                    name="testCases.expectedOutput"
-                    label={t("testCases.expectedOutput")}
                     component={Fields.Input}
-                    placeholder={t("testCases.expectedOutput")}
+                    name="testCases.expectedOutput"
                     rootClassName="mb-[10px] w-full"
+                    label={t("testCases.expectedOutput")}
+                    placeholder={t("testCases.expectedOutput")}
                   />
                 </div>
                 <Button
