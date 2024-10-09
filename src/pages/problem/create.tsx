@@ -104,7 +104,7 @@ const Problem = ({ showCreateModal, createModal }: any): JSX.Element => {
         }}
         onError={(error) => {
           notification.error({
-            message: get(error, "errorMessage", t("Something went wrong!")),
+            message: get(error, "errorMessage", t("All fields must be filled")),
             duration: 2,
           });
         }}
