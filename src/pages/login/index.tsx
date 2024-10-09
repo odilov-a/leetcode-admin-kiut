@@ -1,4 +1,5 @@
 import { Container } from "modules";
+import { notification } from "antd";
 import { Fields, Button } from "components";
 import { FastField } from "formik";
 import { useHooks } from "hooks";
@@ -35,7 +36,10 @@ const Login = () => {
           });
         }}
         onError={(error) => {
-          console.log("Error", error);
+          notification.error({
+            message: get(error, "errorMessage", t("Something went wrong!")),
+            duration: 2,
+          });
         }}
       >
         {({ isLoading, setFieldTouched }) => {

@@ -1,4 +1,4 @@
-import { Spin } from "antd";
+import { Spin, notification } from "antd";
 import { Field } from "formik";
 import { useHooks } from "hooks";
 import { Container } from "modules";
@@ -39,7 +39,10 @@ const Difficulty = ({ showCreateModal, createModal }: any): JSX.Element => {
           showCreateModal(false);
         }}
         onError={(error) => {
-          console.error("Error updating difficulties", error);
+          notification.error({
+            message: get(error, "errorMessage", t("Something went wrong!")),
+            duration: 2,
+          });
         }}
       >
         {({ isLoading }) => {

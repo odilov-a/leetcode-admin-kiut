@@ -1,6 +1,5 @@
-import { Spin } from "antd";
+import { Spin, notification } from "antd";
 import { Field } from "formik";
-import { useState } from "react";
 import { useHooks } from "hooks";
 import { Container } from "modules";
 import { Fields, Button } from "components";
@@ -8,16 +7,7 @@ import { Fields, Button } from "components";
 const Problem = ({ showCreateModal, createModal }: any): JSX.Element => {
   const { t, get } = useHooks();
   let data = createModal.data && createModal?.data;
-  const [testCases, setTestCases] = useState(get(data, "testCases", [""]));
-  const [tutorials, setTutorials] = useState(get(data, "tutorials", [""]));
 
-  const addTutorial = () => {
-    setTutorials([...tutorials, ""]);
-  };
-
-  const addTestCase = () => {
-    setTestCases([...testCases, { input: "", expectedOutput: "" }]);
-  };
   return (
     <div>
       <Container.Form
@@ -99,6 +89,7 @@ const Problem = ({ showCreateModal, createModal }: any): JSX.Element => {
           },
           {
             type: "object",
+            required: true,
             name: "testCases",
             value: {
               inputFileUrl: get(data, "testCases.inputFileUrl"),
@@ -112,7 +103,10 @@ const Problem = ({ showCreateModal, createModal }: any): JSX.Element => {
           showCreateModal(false);
         }}
         onError={(error) => {
-          console.error("Error updating problems", error);
+          notification.error({
+            message: get(error, "errorMessage", t("Something went wrong!")),
+            duration: 2,
+          });
         }}
       >
         {({ isLoading, setFieldValue }) => {
@@ -235,6 +229,7 @@ const Problem = ({ showCreateModal, createModal }: any): JSX.Element => {
                       {t("Input file")}
                     </p>
                     <Field
+                      required
                       label={t("Input file")}
                       rootClassName="mb-[10px]"
                       name="testCases.inputFileUrl"
@@ -246,6 +241,7 @@ const Problem = ({ showCreateModal, createModal }: any): JSX.Element => {
                       {t("Output file")}
                     </p>
                     <Field
+                      required
                       label={t("Output file")}
                       rootClassName="mb-[10px]"
                       name="testCases.outputFileUrl"

@@ -3,7 +3,9 @@ import { useHooks } from "hooks";
 const More = ({ showMoreModal, moreModal }: any) => {
   const data = moreModal?.data;
   const { t } = useHooks();
-
+  if (!data) {
+    return <p>{t("Loading...")}</p>;
+  }
   return (
     <div>
       <div className="flex">
@@ -28,7 +30,9 @@ const More = ({ showMoreModal, moreModal }: any) => {
               {data.subject && data.subject.length > 0 ? (
                 <ul>
                   {data.subject.map((sub: any) => (
-                    <b><li key={sub._id}>{sub.title}</li></b>
+                    <b>
+                      <li key={sub._id}>{sub.title}</li>
+                    </b>
                   ))}
                 </ul>
               ) : (

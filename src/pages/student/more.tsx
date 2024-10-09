@@ -3,7 +3,9 @@ import { useHooks } from "hooks";
 const More = ({ showMoreModal, moreModal }: any) => {
   const data = moreModal?.data;
   const { t } = useHooks();
-
+  if (!data) {
+    return <p>{t("Loading...")}</p>;
+  }
   return (
     <div>
       <div className="flex">
@@ -45,7 +47,9 @@ const More = ({ showMoreModal, moreModal }: any) => {
             <p className="mr-[20px]">
               <p>{t("balance")}:</p>
             </p>
-            <b>{data.balance} {t("ball")}</b>
+            <b>
+              {data.balance} {t("ball")}
+            </b>
           </div>
         </div>
       </div>

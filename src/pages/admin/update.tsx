@@ -1,4 +1,4 @@
-import { Spin } from "antd";
+import { Spin, notification } from "antd";
 import { Field } from "formik";
 import { useHooks } from "hooks";
 import { Container } from "modules";
@@ -7,6 +7,9 @@ import { Fields, Button } from "components";
 const User = ({ showCreateModal, createModal }: any): JSX.Element => {
   const { t, get } = useHooks();
   let data = createModal.data && createModal?.data;
+  if (!data) {
+    return <p>{t("Loading...")}</p>;
+  }
   return (
     <div>
       <Container.Form
@@ -32,7 +35,10 @@ const User = ({ showCreateModal, createModal }: any): JSX.Element => {
           showCreateModal(false);
         }}
         onError={(error) => {
-          console.error("Error updating admins", error);
+          notification.error({
+            message: get(error, "errorMessage", t("Something went wrong!")),
+            duration: 2,
+          });
         }}
       >
         {({ isLoading }) => {
