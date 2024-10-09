@@ -9,6 +9,7 @@ import AsyncSelect from "./ant-async-select";
 import Textarea from "./textarea";
 import Switch from "./switch";
 import FileUpload3 from "./fileUpload3";
+import testUpload from "./testUpload";
 
 export default {
   Input,
@@ -22,4 +23,5 @@ export default {
   Switch,
   FileUploadEmpower2,
   FileUpload3,
+  testUpload,
 };

@@ -68,7 +68,7 @@ const Problem = ({ showCreateModal, createModal }: any): JSX.Element => {
             value: get(data, "point"),
           },
           {
-            type: "any",
+            type: "string",
             required: true,
             name: "tutorials",
             value: get(data, "tutorials"),
@@ -101,8 +101,8 @@ const Problem = ({ showCreateModal, createModal }: any): JSX.Element => {
             type: "object",
             name: "testCases",
             value: {
-              input: get(data, "testCases.input"),
-              expectedOutput: get(data, "testCases.expectedOutput"),
+              inputFileUrl: get(data, "testCases.inputFileUrl"),
+              outputFileUrl: get(data, "testCases.outputFileUrl"),
             },
           },
         ]}
@@ -218,59 +218,39 @@ const Problem = ({ showCreateModal, createModal }: any): JSX.Element => {
                     label={t("memoryLimit")}
                     component={Fields.Input}
                     placeholder={t("memoryLimit")}
+                    rootClassName="mb-[10px] w-full mr-[10px]"
+                  />
+                  <Field
+                    required
+                    name="tutorials"
+                    label={t("tutorial link")}
+                    component={Fields.Input}
+                    placeholder={t("tutorial")}
                     rootClassName="mb-[10px] w-full"
                   />
                 </div>
-                <div className="flex">
-                  <div className="w-full">
-                    <p className="text-[#9EA3B5] px-[12px] py-[6px] bg-[#E6ECFE] dark:bg-[#454d70] rounded-[6px] inline-block mb-[10px] mr-[10px]">
-                      {t("tutorial")}
+                <div className="flex mb-[10px]">
+                  <div className="mr-[10px]">
+                    <p className="text-[#9EA3B5] px-[12px] py-[6px] bg-[#E6ECFE] dark:bg-[#454d70] rounded-[6px] inline-block mb-[12px] mr-[10px]">
+                      {t("Input file")}
                     </p>
-                    <Button
-                      size="large"
-                      onClick={addTutorial}
-                      title={t("Add Tutorial")}
-                      className="mb-[10px]"
+                    <Field
+                      label={t("Input file")}
+                      rootClassName="mb-[10px]"
+                      name="testCases.inputFileUrl"
+                      component={Fields.testUpload}
                     />
-                    {tutorials.map((tutorial: any, index: any) => (
-                      <div key={index} className="flex">
-                        <Field
-                          value={tutorial}
-                          name={`tutorials.${index}`}
-                          component={Fields.Input}
-                          placeholder={t("tutorial")}
-                          rootClassName="mr-[10px]"
-                        />
-                      </div>
-                    ))}
                   </div>
-                  <div className="w-full">
-                    <p className="text-[#9EA3B5] px-[12px] py-[6px] bg-[#E6ECFE] dark:bg-[#454d70] rounded-[6px] inline-block mb-[10px] mr-[30%]">
-                      {t("testCases")}
+                  <div>
+                    <p className="text-[#9EA3B5] px-[12px] py-[6px] bg-[#E6ECFE] dark:bg-[#454d70] rounded-[6px] inline-block mb-[12px] mr-[10px]">
+                      {t("Output file")}
                     </p>
-                    <Button
-                      size="large"
-                      onClick={addTestCase}
-                      title={t("Add Test Case")}
-                      className="mb-[10px]"
+                    <Field
+                      label={t("Output file")}
+                      rootClassName="mb-[10px]"
+                      name="testCases.outputFileUrl"
+                      component={Fields.testUpload}
                     />
-                    {testCases.map((testCase: any, index: any) => (
-                      <div key={index} className="flex">
-                        <Field
-                          name={`testCases${index}.input`}
-                          component={Fields.Input}
-                          placeholder={t("testCases.input")}
-                          value={testCase.input}
-                          rootClassName="mr-[10px]"
-                        />
-                        <Field
-                          name={`testCases${index}.expectedOutput`}
-                          component={Fields.Input}
-                          placeholder={t("testCases.expectedOutput")}
-                          value={testCase.expectedOutput}
-                        />
-                      </div>
-                    ))}
                   </div>
                 </div>
                 <Button
