@@ -62,6 +62,12 @@ const menuItems: MenuItem[] = [
     route: "/problems",
   },
   {
+    key: "extras",
+    label: "Qo'shimcha",
+    icon: <AppstoreOutlined />,
+    route: "/extras",
+  },
+  {
     key: "translations",
     label: "Tarjimalar",
     icon: <TranslationOutlined />,

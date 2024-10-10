@@ -8,6 +8,7 @@ const Student = lazy(() => import("pages/student"));
 const Subject = lazy(() => import("pages/subject"));
 const Teacher = lazy(() => import("pages/teacher"));
 const Problem = lazy(() => import("pages/problem"));
+const Extra = lazy(() => import("pages/studentExtra"));
 const LocalizationPanel = lazy(() => import("pages/localizationPanel"));
 // const Login = lazy(() => import("pages/login"));
 
@@ -62,6 +63,12 @@ const privateRoutes: IRoute[] = [
     key: "problems",
     title: "Masalalar",
     element: <Problem />,
+  },
+  {
+    path: "/extras",
+    key: "extras",
+    title: "Qo'shimcha",
+    element: <Extra />,
   },
   {
     path: "/translations",
