@@ -1,4 +1,4 @@
-import { AppstoreOutlined, TranslationOutlined } from "@ant-design/icons";
+import { AppstoreOutlined, TranslationOutlined, LineChartOutlined, BookOutlined, UserAddOutlined } from "@ant-design/icons";
 
 interface MenuItem {
   key: string;
@@ -34,25 +34,25 @@ const menuItems: MenuItem[] = [
   {
     key: "difficulties",
     label: "Qiyinliklar",
-    icon: <AppstoreOutlined />,
+    icon: <LineChartOutlined />,
     route: "/difficulties",
   },
   {
     key: "subjects",
     label: "Fanlar",
-    icon: <AppstoreOutlined />,
+    icon: <BookOutlined />,
     route: "/subjects",
   },
   {
     key: "students",
     label: "O'quvchilar",
-    icon: <AppstoreOutlined />,
+    icon: <UserAddOutlined />,
     route: "/students",
   },
   {
     key: "teachers",
     label: "O'qituvchilar",
-    icon: <AppstoreOutlined />,
+    icon: <UserAddOutlined />,
     route: "/teachers",
   },
   {
